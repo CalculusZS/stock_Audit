@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Inventory Audit | QIAGEN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #003366; --accent: #2563eb; --bg: #f1f5f9; --text: #1e293b; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .brand { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
+        .search-box { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 16px; margin-bottom: 20px; box-sizing: border-box; }
+        .audit-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f8fafc; text-align: left; padding: 15px; color: #64748b; font-size: 0.8rem; text-transform: uppercase; }
+        td { padding: 15px; border-top: 1px solid #f1f5f9; }
+        .qty-input { width: 70px; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; text-align: center; font-weight: 600; }
+        .diff-tag { font-weight: 700; font-size: 0.9rem; }
+        .btn-submit { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-submit:disabled { background: #cbd5e1; }
+        @media (max-width: 600px) { th:nth-child(2), td:nth-child(2) { display: none; } }
+    </style>
+</head>
+<body onload="initAudit()">
+    <div class="container">
+        <div class="header">
+            <div class="brand">QIAGEN <span style="font-weight:300; color:#64748b;">| Audit System</span></div>
+            <button id="btnSubmit" class="btn-submit" onclick="submitAudit()">Submit Report</button>
+        </div>
+
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search Material ID or Product Name..." oninput="filterTable()">
+
+        <div class="audit-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Details</th>
+                        <th style="text-align:center;">System</th>
+                        <th style="text-align:center;">Actual</th>
+                        <th style="text-align:right;">Discrepancy</th>
+                    </tr>
+                </thead>
+                <tbody id="audit-table-body">
+                    <tr><td colspan="4" align="center">⌛ Fetching corporate stock data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="audit-logic.js"></script>
+</body>
+</html>
