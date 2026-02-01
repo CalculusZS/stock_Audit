@@ -2,38 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Stock Audit - QIAGEN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standalone Audit System</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body onload="loadAuditData()">
+<body onload="initAudit()">
     <div class="container">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-            <button onclick="window.goBack()" style="padding:8px 15px; background:#eee; border-radius:8px; border:none; cursor:pointer;">◀ Back</button>
-            <h2 style="margin:0; color:#003366;">Inventory Audit</h2>
-            <button onclick="submitAudit()" id="btnSubmit" style="background:#2563eb; color:white; padding:10px 20px; border-radius:8px; border:none; font-weight:bold; cursor:pointer;">Submit Report</button>
+            <button onclick="location.href='supervisor.html'" style="padding:10px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">◀ Back</button>
+            <h2 style="margin:0; color:#0f172a;">Physical Audit</h2>
+            <button id="btnSubmit" onclick="submitAuditReport()" style="background:#2563eb; color:white; padding:10px 20px; border-radius:8px; border:none; font-weight:bold; cursor:pointer;">Submit Report</button>
         </div>
 
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="🔍 Find material to audit..." oninput="window.searchStock(this.value, 'audit')">
-        </div>
+        <input type="text" placeholder="🔍 Search material..." oninput="searchAudit(this.value)" 
+               style="width:100%; padding:12px; margin-bottom:15px; border-radius:10px; border:1px solid #ddd; box-sizing:border-box;">
 
-        <div class="card">
-            <table>
-                <thead>
+        <div class="card" style="background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);">
+            <table style="width:100%; border-collapse:collapse;">
+                <thead style="background:#f8fafc;">
                     <tr>
-                        <th>Material & Product</th>
+                        <th style="padding:12px; text-align:left;">Product</th>
                         <th style="text-align:center;">System</th>
-                        <th style="text-align:center;">Actual Count</th>
-                        <th style="text-align:right;">Diff</th>
+                        <th style="text-align:center;">Actual</th>
+                        <th style="text-align:right; padding:12px;">Diff</th>
                     </tr>
                 </thead>
-                <tbody id="data">
-                    </tbody>
+                <tbody id="audit-data"></tbody>
             </table>
         </div>
     </div>
-    <script src="js/app.js"></script>
-    <script src="js/audit.js"></script>
+    <script src="js/audit-core.js"></script>
 </body>
 </html>
